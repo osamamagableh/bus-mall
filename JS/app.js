@@ -110,9 +110,9 @@ function handelClick(event){
       console.log('votes ', votes);
       console.log('views ', views);
 
-      //chartRender();
+      chartRender();
     }
-    // console.table(Goat.all);
+   
   }
 }
 function randomNumber(min, max) {
@@ -120,3 +120,33 @@ function randomNumber(min, max) {
 }
 
 render();
+
+function chartRender() {
+  let ctx = document.getElementById('myChart').getContext('2d');
+  let chart = new Chart(ctx, {
+    
+    type:'bar' ,
+
+    
+    data: {
+      labels: names,
+      datasets: [{
+        label: 'pic votes',
+        backgroundColor: 'red',
+        borderColor: 'rgb(255, 99, 132)',
+        data: votes
+      },
+      {
+        label: 'pic views',
+        backgroundColor: 'green',
+        borderColor: 'rgb(255, 99, 132)',
+        data: views
+      }]
+    },
+
+    
+    options: {}
+  });
+}
+
+
