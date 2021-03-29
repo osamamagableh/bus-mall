@@ -2,7 +2,7 @@
 let leftIndex;
 let midIndex;
 let rightIndex;
-let maxAttempts = 10;
+let maxAttempts = 25;
 let attempt = 1;
 let votes = [];
 let views = [];
