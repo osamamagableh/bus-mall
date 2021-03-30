@@ -125,13 +125,20 @@ function handelClick(event){
       console.log(Mall.result);
       gettingItem();
 
+
     }
     
+
+      chartRender();
+    }
+   
+
   }
 }
 function randomNumber(min, max) {
   return Math.floor(Math.random() * (max - min + 1)) + min;
 }
+
 
 
 
@@ -167,3 +174,36 @@ function gettingItem() {
 Form.addEventListener('submit',addNewProduct);
 
 render();
+=======
+render();
+
+function chartRender() {
+  let ctx = document.getElementById('myChart').getContext('2d');
+  let chart = new Chart(ctx, {
+    
+    type:'bar' ,
+
+    
+    data: {
+      labels: names,
+      datasets: [{
+        label: 'pic votes',
+        backgroundColor: 'red',
+        borderColor: 'rgb(255, 99, 132)',
+        data: votes
+      },
+      {
+        label: 'pic views',
+        backgroundColor: 'green',
+        borderColor: 'rgb(255, 99, 132)',
+        data: views
+      }]
+    },
+
+    
+    options: {}
+  });
+}
+
+
+
