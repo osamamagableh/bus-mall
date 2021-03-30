@@ -95,6 +95,7 @@ function handelClick(event){
       }
       render();
     }
+  }
     else {
       if (event.target.id === rightImage.id) {
         Mall.all[rightIndex].votes++;
@@ -118,7 +119,7 @@ function handelClick(event){
         liEl.textContent = `${Mall.all[i].name} has ${Mall.all[i].views} views and has ${Mall.all[i].votes} votes.`;
         ulEl.appendChild(liEl);
         Mall.result.push(liEl.textContent);
-      }
+      
       imagesSection.removeEventListener('click', handelClick);
       console.log('votes ', votes);
       console.log('views ', views);
@@ -126,7 +127,7 @@ function handelClick(event){
       gettingItem();
 
 
-    }
+    
     
 
       chartRender();
