@@ -172,9 +172,6 @@ function gettingItem() {
 }
 
 Form.addEventListener('submit',addNewProduct);
-
-render();
-=======
 render();
 
 function chartRender() {
