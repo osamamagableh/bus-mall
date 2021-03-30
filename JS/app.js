@@ -2,7 +2,7 @@
 let leftIndex;
 let midIndex;
 let rightIndex;
-let maxAttempts = 10;
+let maxAttempts = 25;
 let attempt = 1;
 let votes = [];
 let views = [];
@@ -32,15 +32,17 @@ const leftImage = document.getElementById('left-image');
 const midImage = document.getElementById('mid-image');
 const rightImage = document.getElementById('right-image');
 const imagesSection = document.getElementById('images-section');
-
-function Mall(name) {
+function Mall(name ,imgurl) {
   this.name = name;
+  this.imgurl=imgurl;
   this.path = `./images/${name}`;
   this.votes = 0;
   this.views = 0;
   Mall.all.push(this);
+  settingItem();
 }
 Mall.all = [];
+Mall.result=[];
 
 for(let i =0;i<names.length;i++){
   new Mall(names[i]);
@@ -52,7 +54,8 @@ function render(){
   leftImage.alt = Mall.all[leftIndex].name;
   leftImage.title = Mall.all[leftIndex].name;
   Mall.all[leftIndex].views++;
- 
+  
+
 
   rightIndex = randomNumber(0,Mall.all.length-1);
   rightImage.src = Mall.all[rightIndex].path;
@@ -60,13 +63,16 @@ function render(){
   rightImage.title = Mall.all[rightIndex].name;
   Mall.all[rightIndex].views++;
   
+
   midIndex = randomNumber(0,Mall.all.length-1);
   midImage.src = Mall.all[midIndex].path;
   midImage.alt = Mall.all[midIndex].name;
   midImage.title = Mall.all[midIndex].name;
   Mall.all[midIndex].views++;
-
+  
 }
+
+
 
 imagesSection.addEventListener('click',handelClick);
 
@@ -77,24 +83,30 @@ function handelClick(event){
       attempt++;
       if (event.target.id === rightImage.id) {
         Mall.all[rightIndex].votes++;
+        
       }
       else if(event.target.id === leftImage.id) {
         Mall.all[leftIndex].votes++;
+       
       }
       else{
         Mall.all[midIndex].votes++;
+       
       }
       render();
     }
     else {
       if (event.target.id === rightImage.id) {
         Mall.all[rightIndex].votes++;
+        
       }
       else if(event.target.id === leftImage.id) {
         Mall.all[leftIndex].votes++;
+       
       }
       else{
         Mall.all[midIndex].votes++;
+       
       }
       let ulEl = document.getElementById('listResult');
       let liEl;
@@ -105,18 +117,53 @@ function handelClick(event){
         liEl = document.createElement('li');
         liEl.textContent = `${Mall.all[i].name} has ${Mall.all[i].views} views and has ${Mall.all[i].votes} votes.`;
         ulEl.appendChild(liEl);
+        Mall.result.push(liEl.textContent);
       }
       imagesSection.removeEventListener('click', handelClick);
       console.log('votes ', votes);
       console.log('views ', views);
+      console.log(Mall.result);
+      gettingItem();
 
-      //chartRender();
     }
-    // console.table(Goat.all);
+    
   }
 }
 function randomNumber(min, max) {
   return Math.floor(Math.random() * (max - min + 1)) + min;
 }
+
+
+
+let myForm = document.getElementById('Form');
+
+
+myForm.addEventListener('submit', addNewProduct);
+
+function addNewProduct(event) {
+  event.preventDefault();
+  let Name = event.target.name.value;
+  
+
+  new Mall(Name);
+}
+function settingItem() {
+  let data = JSON.stringify(Mall.all);
+  localStorage.setItem('product', data);
+}
+
+
+
+function gettingItem() {
+  let stringObj = localStorage.getItem('product');
+  let normalObj = JSON.parse(stringObj);
+  if (normalObj !== null) {
+
+      Mall.all = normalObj;
+  }
+  render();
+}
+
+Form.addEventListener('submit',addNewProduct);
 
 render();
