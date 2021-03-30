@@ -76,7 +76,7 @@ function render(){
 
 imagesSection.addEventListener('click',handelClick);
 
-function handelClick(event){
+function handelClick(event) {
 
   if (event.target.id !== 'images-section') {
     if (attempt < maxAttempts) {
@@ -136,7 +136,7 @@ function handelClick(event){
 
 
   }
-
+}
 
 function randomNumber(min, max) {
   return Math.floor(Math.random() * (max - min + 1)) + min;
@@ -175,9 +175,6 @@ function gettingItem() {
 }
 
 Form.addEventListener('submit',addNewProduct);
-
-
-
 
 render();
 
